@@ -3,7 +3,7 @@
 //Render Functions
 function getAPIData(features,query,format) {
 	
-	var endpoint = 'http://api.wunderground.com/api/cd7f6d9ca8ab5594/' + features +
+	var endpoint = 'https://api.wunderground.com/api/cd7f6d9ca8ab5594/' + features +
 	'/q/' + query + '.' + format;
 
 	var settings = {
