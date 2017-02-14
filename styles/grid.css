@@ -1,41 +1,71 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+/* Grid measurements:
+ *
+ *   1100px wide including 20 gutters (half gutters on both edges)
+ *
+ *   45px columns (20)
+ *   15px gutters (two half-gutters + 19 full gutters, so 20 total)
+ *
+ *
+ *   For smaller screens, we always want 10px of padding on either side,
+ *   so 900 + 10 + 10 => 920px
+ *
+ **/
 .row {
-	max-width: 1000px;
-	padding-left: 20px;
-	padding-right: 20px;
-	margin: 0 auto;
+  max-width: 920px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-.row::before, .row::after {
-	display: table;
-	content: '';
+/* Clearfix */
+.row::before,
+.row::after {
+  display: table;
+  content: '';
 }
 
 .row::after {
-	clear: both;
+  clear: both;
 }
 
-.col-4, .col-12{
-	float: left;
-	padding-left: 1.041666666%;
-	padding-right: 1.04166666%;
-	margin-bottom: 15px;
-	margin-top: 15px;
+.col-3, .col-4, .col-6, .col-12, .col-2 {
+  float: left;
+
+  /* Gutters:
+   * Each column is padded by half-a-gutter on each side,
+   *
+   * Half a gutter is 5px, 5/920 (context) = 1.041666%
+   *
+   */
+  padding-left: 1.005434%;
+  padding-right: 1.005434%;
 }
 
-.col-4, .col-12 {
-	width: 100%;
+/* Mobile defaults */
+.col-2, .col-4, .col-20 {
+  width: 100%;
 }
 
-@media only screen and (min-width: 640px) {
-	.col-12 {
-		width: 100%;
-	}
-	.col-4 {
-		width: 33%;
-	}
-}
 
+/* Non-mobile, grid */
+@media only screen and (min-width: 920px) {
+
+  /* 4 columns */
+  .col-4 {
+    width: 20%;
+  }
+
+  /* 12 columns */
+  .col-20 {
+    width: 100%;
+  }
+
+  .col-2 {
+    width: 10%;
+  }
+}

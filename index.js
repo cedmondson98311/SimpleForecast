@@ -1,41 +1,68 @@
 //Globals
 
 //Render Functions
-function getAPIData(searchTerm,cbfunction) {
-	console.log('getAPIData called');
+function getAPIData(features,query,format) {
 	
-	var settings = {
-	dataType:'jsonp',
-	q:searchTerm,
-	type:'shows',
-	k:'258899-Thinkful-7PYLQECB',
-	success:cbfunction
-	};
+	var endpoint = 'http://api.wunderground.com/api/cd7f6d9ca8ab5594/' + features +
+	'/q/' + query + '.' + format;
 
-	$.ajax('https://www.tastekid.com/api/similar',settings);
+	var settings = {
+		success:jsonpFunction
+	}
+	$.ajax(endpoint,settings);
 };
 
-function useAPIData(data) {
-	console.log('useAPIData called');
-	console.log(data)
-}
+function jsonpFunction(data) {
+	console.log(data);
+	var response = data.forecast.simpleforecast.forecastday;
+	for (var i = 0; i < response.length / 2; i ++) {
+		var date = response[i].date.monthname + ' ' + response[i].date.day;
+		var icon = response[i].icon_url;
+		renderDaysRow1(date,response[i].conditions,icon);
+		}
+	for (var i = 5; i < response.length; i ++) {
+		var date = response[i].date.monthname + ' ' + response[i].date.day;
+		var icon = response[i].icon_url;
+		renderDaysRow2(date,response[i].conditions,icon);
+		}
+	};
 
-function completeFunction() {
-	console.log('ajax call complete');
-}
+function renderDaysRow1(day,conditions,icon) {
+	$('.js-forecast-1').append('<div class=\'forecastDay col-4\'><p>' + day + ':</p><p>' + conditions +
+		'</p><img src=' + icon + '>');
+	}
 
-function successFunction(data,textStatus,jqXHR) {
-	console.log('successful call');
-}
+function renderDaysRow2(day,conditions,icon) {
+	$('.js-forecast-2').append('<div class=\'forecastDay col-4\'><p>' + day + ':</p><p>' + conditions +
+		'</p><img src=' + icon + '>');
+	}
 
-//AJAX Calls
+//Event Listeners
 $(function() {
-	//$.ajax('https://www.tastekid.com/api/similar',settings);
-	//$.getJSON('https://www.tastekid.com/api/similar',settings,useAPIData);
-	getAPIData('game of thrones',useAPIData)
+	$('.search-bar-form').submit(function(event) {
+		//Convert the search term from standard format to what the API expects
+		var query = $('.search-bar').val();
+		var state = query.slice(-2).toUpperCase();
+		var city = query.replace(/\s/g,'_').slice(0,query.length-4);
+		var fixedQuery = state + '/' + city;
+
+		getAPIData('forecast10day',fixedQuery,'json');
+		//$('.search-bar-form').addClass('hidden');
+		$('.js-forecast-1').removeClass('hidden');
+		$('.js-forecast-2').removeClass('hidden');
+		event.preventDefault();
+	});
 });
 
 
-//Event Listeners
 
 
+//Test Function Calls
+//getAPIData('forecast10day','WA/Seattle','json');
+
+
+//Seattle, WA
+
+//WA/Seattle
+
+//query.replace(/\s | \,/g,'')

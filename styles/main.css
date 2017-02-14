@@ -1,3 +1,48 @@
 * {
 	box-sizing: border-box;
 }
+
+body {
+	margin: 0 0 0 0;
+}
+
+h1 {
+	margin-top: 0px;
+	margin-left: 10px;
+}
+
+header {
+	background-color: grey;
+	border: 1 px solid black;
+}
+
+.forecastDay {
+	border: 1px solid grey;
+}
+
+.forecastDay, p {
+	text-align: center;
+}
+
+.forecastDay, img {
+	text-align: center;
+}
+
+.js-forecast-1 {
+	margin-top: 20px;
+}
+
+.hidden {
+	display: none;
+}
+
+.search-bar-div {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+}
+
+.search-bar {
+	width: 275px;
+}

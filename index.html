@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-<link rel="stylesheet" type="text/css" src="styles/main.css">
-<link rel="sytlesheet" type="text/css" src="styles/grid.css">
-<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/grid.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <header>
+   		<h1>SimpleForecast</h1>
+   	</header>
 </head>
 <body>
-	<div class="test"><p>This will be a simple Etsy search application</p>
+	<div class="search-bar-div">
+	<form class="search-bar-form">
+			<input class="search-bar" placeholder="Enter Location e.g. Seattle, WA">
+			<button class="search-button">Get My Forecast</button>
+		</form>
+	</div>
+	<div class="js-forecast-1 row hidden">
+	</div>
+	<div class="js-forecast-2 row hidden">
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
