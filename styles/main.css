@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -22,10 +23,14 @@ header {
 
 .forecastDay, p {
 	text-align: center;
+	color: black;
+	font-size: 1.2em;
+	opacity: 1.0;
 }
 
 .forecastDay, img {
 	text-align: center;
+	opacity: 1.0;
 }
 
 .js-forecast-1 {
@@ -45,4 +50,32 @@ header {
 
 .search-bar {
 	width: 275px;
+}
+
+.Rain {
+	background-image: url('http://static3.bigstockphoto.com/thumbs/5/4/1/large1500/145489445.jpg');
+}
+
+.Overcast {
+	background-image: url('http://static2.bigstockphoto.com/thumbs/9/2/1/large1500/129803924.jpg');
+}
+
+.Chance_of_Rain {
+	background-image: url('http://static1.bigstockphoto.com/thumbs/5/4/1/large1500/145489409.jpg');
+}
+
+.Partly_Cloudy {
+	background-image: url('http://static2.bigstockphoto.com/thumbs/5/3/1/large1500/135982817.jpg');
+}
+
+.Mostly_Cloudy {
+	background-image: url('http://static3.bigstockphoto.com/thumbs/2/2/1/large1500/122195.jpg');
+}
+
+.Clear {
+	background-image: url('https://pattip0414.files.wordpress.com/2016/05/sunny-day.jpg');
+}
+
+.Snow {
+	background-image: url('http://static1.bigstockphoto.com/thumbs/1/5/1/large1500/151445573.jpg');
 }

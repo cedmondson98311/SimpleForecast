@@ -27,42 +27,48 @@ function jsonpFunction(data) {
 		}
 	};
 
+function renderResultsHeader(location) {
+	$('.js-forecast-1').append('<div><p class="results-header">10 Day Forecast for ' + location + '</p></div>');
+	}
+
 function renderDaysRow1(day,conditions,icon) {
-	$('.js-forecast-1').append('<div class=\'forecastDay col-4\'><p>' + day + ':</p><p>' + conditions +
+	$('.js-forecast-1').append('<div class=\'forecastDay col-4 ' + normalizeConditionsText(conditions) + '\'><p>' + day + ':</p><p>' + conditions +
 		'</p><img src=' + icon + '>');
 	}
 
 function renderDaysRow2(day,conditions,icon) {
-	$('.js-forecast-2').append('<div class=\'forecastDay col-4\'><p>' + day + ':</p><p>' + conditions +
+	$('.js-forecast-1').append('<div class=\'forecastDay col-4 ' + normalizeConditionsText(conditions) + '\'><p>' + day + ':</p><p>' + conditions +
 		'</p><img src=' + icon + '>');
 	}
+
+function capitalizeFirstLetter(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+function normalizeConditionsText(string) {
+	return string.replace(/\s/g,'_');
+	}
+
+function grabUserQuery() {
+	var query = $('.search-bar').val();
+	//These lines tokenize and format the user query for use in the API call
+		var state = query.slice(-2).toUpperCase();
+		var city = query.replace(/\s/g,'_').slice(0,query.length-4);
+		var fixedQuery = state + '/' + capitalizeFirstLetter(city);
+	getAPIData('forecast10day',fixedQuery,'json');
+	renderResultsHeader(capitalizeFirstLetter(city) + ',' + state);
+}
 
 //Event Listeners
 $(function() {
 	$('.search-bar-form').submit(function(event) {
-		//Convert the search term from standard format to what the API expects
-		var query = $('.search-bar').val();
-		var state = query.slice(-2).toUpperCase();
-		var city = query.replace(/\s/g,'_').slice(0,query.length-4);
-		var fixedQuery = state + '/' + city;
-
-		getAPIData('forecast10day',fixedQuery,'json');
-		//$('.search-bar-form').addClass('hidden');
+		$('.js-forecast-1').empty();
+		$('.js-forecast-2').empty();
+		grabUserQuery();
 		$('.js-forecast-1').removeClass('hidden');
 		$('.js-forecast-2').removeClass('hidden');
 		event.preventDefault();
 	});
 });
 
-
-
-
-//Test Function Calls
-//getAPIData('forecast10day','WA/Seattle','json');
-
-
-//Seattle, WA
-
-//WA/Seattle
-
-//query.replace(/\s | \,/g,'')
+//Test Section
