@@ -87,6 +87,8 @@ $(function() {
 	$('.search-bar-form').submit(function(event) {
 		event.preventDefault();
 		$('.js-forecast-1').empty();
+		$('.current-conditions').empty();
+		$('.credit-header').empty();
 		grabUserQuery();
 		$('.shifted').removeClass('shifted');
 		$('.js-forecast-1').removeClass('hidden');
