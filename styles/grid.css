@@ -47,10 +47,9 @@
 }
 
 /* Mobile defaults */
-.col-2, .col-4, .col-20 {
+.col-2, .col-4, .col-10, .col-20 {
   width: 100%;
 }
-
 
 /* Non-mobile, grid */
 @media only screen and (min-width: 920px) {
@@ -58,6 +57,7 @@
   /* 4 columns */
   .col-4 {
     width: 20%;
+    height: 200px;
   }
 
   /* 12 columns */
@@ -67,5 +67,9 @@
 
   .col-2 {
     width: 10%;
+  }
+
+  .col-10 {
+    width: 50%;
   }
 }

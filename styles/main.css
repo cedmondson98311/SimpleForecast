@@ -19,18 +19,21 @@ header {
 
 .forecastDay {
 	border: 1px solid grey;
+	border-radius: 2px;
 }
 
-.forecastDay, p {
+.forecastDay p {
 	text-align: center;
 	color: black;
 	font-size: 1.15em;
 	opacity: 1.0;
 }
 
-.forecastDay, img {
+.forecastDay img {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
 	text-align: center;
-	opacity: 1.0;
 }
 
 .js-forecast-1 {
@@ -42,14 +45,82 @@ header {
 }
 
 .search-bar-div {
-	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 30px;
+	margin-top: 30px;
 }
 
 .search-bar {
-	width: 275px;
+	font-size: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	text-align: center;
+	display: block;
+}
+
+.search-button {
+	font-size: 20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hidden {
+	display: none;
+}
+
+.shifted {
+	position: relative;
+	top: 300px;
+}
+
+.search-instructions {
+	font-size: 12px;
+	opacity: 0.7;
+	text-align: center;
+	margin-top: 15px;
+}
+
+.results-header {
+	text-align: center;
+	font-size: 20px;
+}
+
+.credit-logo {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.current-conditions {
+	display: block;
+}
+
+#header-credit {
+	display: inline;
+	font-size: 14px;
+	margin-left: 10px;
+}
+
+#header-title {
+	display: inline;
+}
+
+#credit-link {
+	color: black;
+}
+
+.header p {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.current {
+	text-align: center;
+	border: 1px solid grey;
 }
 
 .Rain {
@@ -78,4 +149,22 @@ header {
 
 .Snow {
 	background-image: url('http://static1.bigstockphoto.com/thumbs/1/5/1/large1500/151445573.jpg');
+}
+
+@media only screen and (max-device-width: 425px) {
+	body {
+		padding: 10px;
+	}
+
+	.search-bar {
+		width: 100%;
+		font-size: 40px;
+		height: 75px;
+	}
+
+	#header-credit {
+		display: block;
+		text-align: left;
+		margin-top: 0;
+	}
 }

@@ -7,21 +7,23 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <header>
-   		<h1>SimpleForecast</h1>
+   		<h1 id="header-title">SimpleForecast</h1>
+   		<p id="header-credit">Powered by <a id="credit-link" href="www.weatherunderground.com">Weather Underground</a></p>
    	</header>
 </head>
 <body>
-	<div class="search-bar-div">
+	<div class="search-bar-div shifted">
 	<form class="search-bar-form">
-			<input class="search-bar" placeholder="Enter Location e.g. Seattle, WA">
+			<input class="search-bar" placeholder="Enter Location">
 			<button class="search-button">Get My Forecast</button>
-		</form>
+	</form>
+	<p class="search-instructions">Please enter a location in City, State format e.g. Seattle, WA</p>
 	</div>
 	<div class="js-forecast-1 row hidden">
 	</div>
-	<div class="js-forecast-2 row hidden">
+	<div class="current-conditions row hidden">
 	</div>
-	<div id="images">
+	<div class="credit-header hidden">
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
