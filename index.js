@@ -1,13 +1,13 @@
 //API Functions
 function getAPIData(features,query,format) {
 	
-	var endpoint = 'https://api.wunderground.com/api/cd7f6d9ca8ab5594/' + features +
+	var forecastEndpoint = 'https://api.wunderground.com/api/cd7f6d9ca8ab5594/' + features +
 	'/q/' + query + '.' + format;
 
 	var settings = {
 		success:jsonpFunction
 	}
-	$.ajax(endpoint,settings);
+	$.ajax(forecastEndpoint,settings);
 };
 
 //Render Functions
@@ -28,12 +28,18 @@ function jsonpFunction(data) {
 	for (var i = 0; i < response.length / 2; i ++) {
 		var date = response[i].date.monthname + ' ' + response[i].date.day;
 		var icon = response[i].icon_url;
-		renderDaysRow1(date,response[i].conditions,icon);
+		var highTemp = response[i].high.fahrenheit;
+		var lowTemp = response[i].low.fahrenheit;
+		
+		renderDays(date,response[i].conditions,icon,highTemp,lowTemp);
 		}
 	for (var i = 5; i < response.length; i ++) {
 		var date = response[i].date.monthname + ' ' + response[i].date.day;
 		var icon = response[i].icon_url;
-		renderDaysRow2(date,response[i].conditions,icon);
+		var highTemp = response[i].high.fahrenheit;
+		var lowTemp = response[i].low.fahrenheit;
+		
+		renderDays(date,response[i].conditions,icon,highTemp,lowTemp);
 		}
 
 	renderCurrentConditions(currentCondition,currentConditionIcon,currentTemp,currentHigh,currentLow);
@@ -43,25 +49,22 @@ function jsonpFunction(data) {
 	};
 
 function renderResultsHeader(location) {
-	$('.js-forecast-1').append('<div><p class="results-header">10 Day Forecast for ' + location + '</p></div>');
+	$('.forecast').append('<div><p class="results-header">10 Day Forecast for ' + location + '</p></div>');
 	}
 
 function renderCreditHeader(logo,link) {
 	$('.credit-header').append('<a href=\"' + link + '\"><img class="credit-logo" src=\"' + logo + '\"></a>');
 }
 
-function renderDaysRow1(day,conditions,icon) {
-	$('.js-forecast-1').append('<div class=\'forecastDay col-4 ' + normalizeConditionsText(conditions) + '\'><p>' + day + ':</p><p>' + conditions +
-		'</p><img src=' + icon + '>');
+function renderDays(day,conditions,icon,highTemp,lowTemp) {
+	$('.forecast').append('<div class=\'forecastDay col-4 ' + normalizeConditionsText(conditions) + '\'><p>' + day + 
+		':</p><p class=\"conditions\">' + conditions +
+		'</p><img src=' + icon + '><p>H: ' + highTemp + '&degF&nbsp&nbsp&nbspL: ' + lowTemp + '&degF');
 	}
 
-function renderDaysRow2(day,conditions,icon) {
-	$('.js-forecast-1').append('<div class=\'forecastDay col-4 ' + normalizeConditionsText(conditions) + '\'><p>' + day + ':</p><p>' + conditions +
-		'</p><img src=' + icon + '>');
-	}
-
-function renderCurrentConditions(condition,iconURL,temp,highTemp,lowTemp) {
-	$('.current-conditions').append('<div class=\"header\"><p>Current Conditions</p></div><div class=\"col-10 current\"><p>' + condition + '</p><img src=\"' + iconURL + '\"><p>Current Temperature: ' + temp +
+function renderCurrentConditions(conditions,iconURL,temp,highTemp,lowTemp) {
+	$('.current-conditions').append('<div class=\"results-header\"><p>Current Conditions</p></div><div class=\"col-20 current ' + 
+		normalizeConditionsText(conditions) + '\"><p>' + conditions + '</p><img src=\"' + iconURL + '\"><p>Current Temperature: ' + temp +
 		'</p><p>Today\'s High: ' + highTemp + '</p><p>Today\'s Low ' + lowTemp + '</p></div>');
 }
 
@@ -74,11 +77,14 @@ function normalizeConditionsText(string) {
 	}
 
 function grabUserQuery() {
-	var query = $('.search-bar').val();
+	var query = $('.search-bar').val().trim();
 	//These lines tokenize and format the user query for use in the API call
 		var state = query.slice(-2).toUpperCase();
-		var city = query.replace(/\s/g,'_').slice(0,query.length-4);
+		console.log(state);
+		var city = query.replace(/\s/g,'_').slice(0,query.indexOf(','));
+		console.log(city);
 		var fixedQuery = state + '/' + capitalizeFirstLetter(city);
+		console.log(fixedQuery);
 	getAPIData('forecast10day/conditions',fixedQuery,'json');
 }
 
@@ -86,12 +92,12 @@ function grabUserQuery() {
 $(function() {
 	$('.search-bar-form').submit(function(event) {
 		event.preventDefault();
-		$('.js-forecast-1').empty();
+		$('.forecast').empty();
 		$('.current-conditions').empty();
 		$('.credit-header').empty();
 		grabUserQuery();
 		$('.shifted').removeClass('shifted');
-		$('.js-forecast-1').removeClass('hidden');
+		$('.forecast').removeClass('hidden');
 		$('.credit-header').removeClass('hidden');
 		$('.current-conditions').removeClass('hidden');
 	});

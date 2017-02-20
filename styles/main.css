@@ -26,7 +26,6 @@ header {
 	text-align: center;
 	color: black;
 	font-size: 1.15em;
-	opacity: 1.0;
 }
 
 .forecastDay img {
@@ -85,7 +84,7 @@ header {
 
 .results-header {
 	text-align: center;
-	font-size: 20px;
+	font-size: 25px;
 }
 
 .credit-logo {
@@ -123,33 +122,197 @@ header {
 	border: 1px solid grey;
 }
 
+.conditions {
+	height: 30px;
+}
+
 .Rain {
-	background-image: url('http://static3.bigstockphoto.com/thumbs/5/4/1/large1500/145489445.jpg');
+	position: relative;
+}
+
+.Rain::after {
+	content: '';
+	background-image: url('https://static3.bigstockphoto.com/thumbs/5/4/1/large1500/145489445.jpg');
+	opacity: 0.6;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
 }
 
 .Overcast {
-	background-image: url('http://static2.bigstockphoto.com/thumbs/9/2/1/large1500/129803924.jpg');
+	position: relative;
+}
+
+.Overcast::after {
+	content: '';
+	background-image: url('https://static2.bigstockphoto.com/thumbs/9/2/1/large1500/129803924.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
 }
 
 .Chance_of_Rain {
-	background-image: url('http://static1.bigstockphoto.com/thumbs/5/4/1/large1500/145489409.jpg');
+	position: relative;
+}
+
+.Chance_of_Rain::after {
+	content: '';
+	background-image: url('https://static1.bigstockphoto.com/thumbs/5/4/1/large1500/145489409.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
 }
 
 .Partly_Cloudy {
-	background-image: url('http://static2.bigstockphoto.com/thumbs/5/3/1/large1500/135982817.jpg');
+	position: relative;
+}
+
+.Partly_Cloudy::after {
+	content: '';
+	background-image: url('http://static3.bigstockphoto.com/thumbs/5/4/1/large1500/145989095.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
 }
 
 .Mostly_Cloudy {
-	background-image: url('http://static3.bigstockphoto.com/thumbs/2/2/1/large1500/122195.jpg');
+	position: relative;
+}
+
+.Mostly_Cloudy::after {
+	content: '';
+	background-image: url('https://static3.bigstockphoto.com/thumbs/2/2/1/large1500/122195.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
 }
 
 .Clear {
+	position: relative;
+}
+
+.Clear::after {
+    content: '';
 	background-image: url('https://pattip0414.files.wordpress.com/2016/05/sunny-day.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
 }
 
 .Snow {
-	background-image: url('http://static1.bigstockphoto.com/thumbs/1/5/1/large1500/151445573.jpg');
+	position: relative;
 }
+
+.Snow::after {
+	content: '';
+	background-image: url('http://static2.bigstockphoto.com/thumbs/3/5/1/large1500/153177671.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
+.Chance_of_a_Thunderstorm {
+	position: relative;
+}
+
+.Chance_of_a_Thunderstorm::after {
+	content: '';
+	background-image: url('http://static3.bigstockphoto.com/thumbs/6/5/4/large1500/4560508.jpg');
+	opacity: 0.3;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
+.Thunderstorm {
+	position: relative;
+}
+
+.Thunderstorm::after {
+	content: '';
+	background-image: url('http://static3.bigstockphoto.com/thumbs/6/5/4/large1500/4560508.jpg');
+	opacity: 0.3;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 125%;
+}
+
+.Scattered_Clouds {
+	position: relative;
+}
+
+.Scattered_Clouds::after {
+	content: '';
+	background-image: url('http://static3.bigstockphoto.com/thumbs/3/6/1/large1500/163666955.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
+.Snow_Showers {
+	position: relative;
+}
+
+.Snow_Showers::after {
+	content: '';
+	background-image: url('http://static2.bigstockphoto.com/thumbs/3/5/1/large1500/153177671.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
 
 @media only screen and (max-device-width: 425px) {
 	body {
