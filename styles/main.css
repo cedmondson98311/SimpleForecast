@@ -330,4 +330,8 @@ header {
 		text-align: left;
 		margin-top: 0;
 	}
+
+	.shifted {
+		top: 100px;
+	}
 }
