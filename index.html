@@ -17,7 +17,12 @@
 			<input class="search-bar" placeholder="Enter Location">
 			<button class="search-button">Get My Forecast</button>
 	</form>
-	<p class="search-instructions">Please enter a location in City, State format e.g. Seattle, WA</p>
+	<p class="search-instructions">Find your ten day forecast.</p>
+	</div>
+	<div class="error-div hidden">
+		<p id="error">Something went wrong! You may have entered a country that isn't supported yet. Please try another search.</p>
+	</div>
+	<div class="img-holder">
 	</div>
 	<div class="forecast row hidden">
 	</div>
@@ -27,5 +32,6 @@
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="jquery.ajax-cross-origin.min.js"></script>
 <script type="text/javascript" src="index.js"></script>
 </html>

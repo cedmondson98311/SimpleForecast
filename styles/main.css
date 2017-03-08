@@ -5,6 +5,7 @@
 
 body {
 	margin: 0 0 0 0;
+	background-image: url('images/weather.png');
 }
 
 h1 {
@@ -41,6 +42,19 @@ header {
 
 .hidden {
 	display: none;
+}
+
+.city-image {
+	border-radius: 10px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.img-holder{
+	width: 900px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .search-bar-div {
@@ -109,6 +123,12 @@ header {
 
 #credit-link {
 	color: black;
+}
+
+#error {
+	color: red;
+	font-size: 1.2em;
+	text-align: center;
 }
 
 .header p {
@@ -313,6 +333,41 @@ header {
 	background-size: 100% 115%;
 }
 
+.Light_Ice_Pellets {
+	position: relative;
+}
+
+.Light_Ice_Pellets::after {
+	content: '';
+	background-image: url('http://1ul4bt3se09x1ot2q02ob5co.wpengine.netdna-cdn.com/wp-content/uploads/2015/08/hailstorms.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
+.Ice_Pellets {
+	position: relative;
+}
+
+.Ice_Pellets::after {
+	content: '';
+	background-image: url('http://1ul4bt3se09x1ot2q02ob5co.wpengine.netdna-cdn.com/wp-content/uploads/2015/08/hailstorms.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
+
 
 @media only screen and (max-device-width: 425px) {
 	body {
@@ -333,5 +388,12 @@ header {
 
 	.shifted {
 		top: 100px;
+	}
+
+	.city-image {
+		width: 320px;
+		height: 198px;
+		border-radius: 10px;
+		display: block;
 	}
 }
