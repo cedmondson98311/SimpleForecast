@@ -421,3 +421,14 @@ header {
 		display: none;
 	}
 }
+
+@media only screen and (max-width: 900px) {
+
+	.img-holder {
+		/*display:none;*/
+	}
+
+	.city-image, .search-bar {
+		width:100%;
+	}
+}
