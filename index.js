@@ -12,6 +12,8 @@ function getForecastData(features,query,format) {
 
 //Render Functions
 function renderForecast(data) {
+	console.log('renderForecast')
+
 	$('.error-div').addClass('hidden');
 	if(data.forecast) {
 		var response = data.forecast.simpleforecast.forecastday;
@@ -81,6 +83,7 @@ function normalizeConditionsText(string) {
 	}
 
 function grabUserQuery() {
+	console.log('grabUserQuery')
 	var query = $('.search-bar').val().trim();
 	getAutoCompleteData(query);
 }
@@ -102,6 +105,8 @@ $(function() {
 
 //Test Section
 function parseAutoCompleteResults(data) {
+	
+	console.log('parseAutoCompleteResults')
 	var response = JSON.parse(data);
 	
 	var city = response.predictions[0].terms[0].value;
@@ -126,7 +131,7 @@ function parseAutoCompleteResults(data) {
 }
 
 function getAutoCompleteData(query) {
-	
+	console.log('getAutoCompleteData')
 	var placesEndpoint = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + query + '&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
 
 	var settings = {
@@ -153,7 +158,7 @@ function parsePlaceDetailsData(data) {
 }
 
 function getPlaceDetailsData(placeID) {
-
+	console.log('getPlaceDetailsData')
 	var detailsEndpoint = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeID +'&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
 
 	var settings = {

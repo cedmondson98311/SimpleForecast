@@ -7,22 +7,23 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <header>
+    	<p id="header-credit">Powered by <a id="credit-link" href="www.weatherunderground.com">Weather Underground</a></p>
    		<h1 id="header-title">SimpleForecast</h1>
-   		<p id="header-credit">Powered by <a id="credit-link" href="www.weatherunderground.com">Weather Underground</a></p>
+   		<p id="header-subtitle">Because Reasons!</p>
    	</header>
 </head>
 <body>
+	<p class="search-instructions shifted">Find your ten day forecast.</p>
 	<div class="search-bar-div shifted">
 	<form class="search-bar-form">
 			<input class="search-bar" placeholder="Enter Location">
 			<button class="search-button">Get My Forecast</button>
 	</form>
-	<p class="search-instructions">Find your ten day forecast.</p>
 	</div>
 	<div class="error-div hidden">
 		<p id="error">Something went wrong! You may have entered a country that isn't supported yet. Please try another search.</p>
 	</div>
-	<div class="img-holder">
+	<div class="img-holder row">
 	</div>
 	<div class="forecast row hidden">
 	</div>
@@ -31,7 +32,7 @@
 	<div class="credit-header hidden">
 	</div>
 </body>
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <script type="text/javascript" src="jquery.ajax-cross-origin.min.js"></script>
 <script type="text/javascript" src="index.js"></script>
 </html>

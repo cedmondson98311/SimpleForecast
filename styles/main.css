@@ -15,7 +15,7 @@ h1 {
 
 header {
 	background-color: grey;
-	border: 1 px solid black;
+	height: 70px;
 }
 
 .forecastDay {
@@ -47,12 +47,6 @@ header {
 .city-image {
 	border-radius: 10px;
 	display: block;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.img-holder{
-	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -90,7 +84,7 @@ header {
 }
 
 .search-instructions {
-	font-size: 12px;
+	font-size: 16px;
 	opacity: 0.7;
 	text-align: center;
 	margin-top: 15px;
@@ -112,13 +106,22 @@ header {
 }
 
 #header-credit {
-	display: inline;
 	font-size: 14px;
-	margin-left: 10px;
+	float: right;
+	margin-right: 10px;
+	position: relative;
+	top:32px;
 }
 
 #header-title {
 	display: inline;
+}
+
+#header-subtitle {
+	margin-left: 10px;
+	position: relative;
+	bottom: 14px;
+	font-size: 18px;
 }
 
 #credit-link {
@@ -374,6 +377,10 @@ header {
 		padding: 10px;
 	}
 
+	header {
+		text-align: center;
+	}
+
 	.search-bar {
 		width: 100%;
 		font-size: 40px;
@@ -381,9 +388,7 @@ header {
 	}
 
 	#header-credit {
-		display: block;
-		text-align: left;
-		margin-top: 0;
+		display: none;
 	}
 
 	.shifted {
@@ -391,9 +396,19 @@ header {
 	}
 
 	.city-image {
-		width: 302px;
+		width: 285px;
 		height: 198px;
 		border-radius: 10px;
-		display: block;
+	}
+
+	#header-title {
+		font-size: 36px;
+		position: relative;
+		top:10px;
+		margin:0;
+	}
+
+	#header-subtitle {
+		display: none;
 	}
 }
