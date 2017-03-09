@@ -37,7 +37,7 @@ function renderForecast(data) {
 			}
 		for (var i = 5; i < response.length; i ++) {
 			var date = response[i].date.monthname + ' ' + response[i].date.day;
-			var icon = response[i].icon_url;
+			var icon = response[i].icon_url.replace('http:','https:');
 			var highTemp = response[i].high.fahrenheit;
 			var lowTemp = response[i].low.fahrenheit;
 			
