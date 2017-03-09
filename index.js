@@ -10,10 +10,76 @@ function getForecastData(features,query,format) {
 	$.ajax(forecastEndpoint,settings);
 };
 
+function getAutoCompleteData(query) {
+	var placesEndpoint = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + query + '&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
+
+	var settings = {
+		crossOrigin:true,
+		success:parseAutoCompleteResults
+	}
+	$.ajax(placesEndpoint,settings);
+};
+
+function getPlaceDetailsData(placeID) {
+	var detailsEndpoint = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeID +'&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
+
+	var settings = {
+		crossOrigin:true,
+		success:parsePlaceDetailsData
+	};
+
+	$.ajax(detailsEndpoint,settings);
+};
+
+//Parse Functions
+function parseAutoCompleteResults(data) {
+	var response = JSON.parse(data);
+	
+	var city = response.predictions[0].terms[0].value;
+	var state = response.predictions[0].terms[1].value;
+	if(response.predictions[0].terms[2]) {
+	var country = response.predictions[0].terms[2].value;
+		if(country == 'Canada') {
+			state = 'Canada';
+		} else if(country == 'Australia') {
+			state = 'Australia';
+		} else if(country == 'United Kingdom') {
+			state = 'United Kingdom';
+		} else{};
+	}
+
+	var fixedQuery = state + '/' + city;
+	
+	getForecastData('forecast10day/conditions',fixedQuery,'json');
+
+	var placeID = response.predictions[0].place_id;
+	getPlaceDetailsData(placeID);
+}
+
+function parsePlaceDetailsData(data) {
+	var response = JSON.parse(data);
+
+	var photoReference = response.result.photos[0].photo_reference;
+	var maxwidth = 900;
+	var maxheight = 556;
+
+	usePhotoData(photoReference,maxwidth,maxheight);
+}
+
+function usePhotoData(photoReference,maxWidth,maxheight) {
+	
+	var photoEndpoint = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + photoReference + '&maxwidth=' + maxWidth + '&maxheight=' + 
+	maxheight + '&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
+	
+	$('.img-holder').html('');
+	$('.img-holder').html('<img class="city-image" src=\"' + photoEndpoint + '\">');
+};
+
 //Render Functions
 function renderForecast(data) {
 
 	$('.error-div').addClass('hidden');
+	
 	if(data.forecast) {
 		var response = data.forecast.simpleforecast.forecastday;
 		var fullLocation = data.current_observation.display_location.full;
@@ -48,10 +114,11 @@ function renderForecast(data) {
 
 		renderCreditHeader(creditImage,creditLink);
 	} else {
+		
 		$('.error-div').removeClass('hidden');
 	}
 
-	};
+};
 
 function renderResultsHeader(location) {
 	$('.forecast').append('<div><p class="results-header">10 Day Forecast for ' + location + '</p></div>');
@@ -72,10 +139,6 @@ function renderCurrentConditions(conditions,iconURL,temp,highTemp,lowTemp) {
 		normalizeConditionsText(conditions) + '\"><p>' + conditions + '</p><img src=\"' + iconURL + '\"><p>Current Temperature: ' + temp +
 		'</p><p>Today\'s High: ' + highTemp + '</p><p>Today\'s Low ' + lowTemp + '</p></div>');
 }
-
-function capitalizeFirstLetter(string) {
-	return string.charAt(0).toUpperCase() + string.slice(1);
-	}
 
 function normalizeConditionsText(string) {
 	return string.replace(/\s/g,'_');
@@ -100,77 +163,6 @@ $(function() {
 		$('.current-conditions').removeClass('hidden');
 	});
 });
-
-//Test Section
-function parseAutoCompleteResults(data) {
-	var response = JSON.parse(data);
-	console.log(response);
-	
-	var city = response.predictions[0].terms[0].value;
-	var state = response.predictions[0].terms[1].value;
-	if(response.predictions[0].terms[2]) {
-	var country = response.predictions[0].terms[2].value;
-		if(country == 'Canada') {
-			state = 'Canada';
-		} else if(country == 'Australia') {
-			state = 'Australia';
-		} else if(country == 'United Kingdom') {
-			state = 'United Kingdom';
-		} else{};
-	}
-
-	var fixedQuery = state + '/' + city;
-	
-	getForecastData('forecast10day/conditions',fixedQuery,'json');
-
-	var placeID = response.predictions[0].place_id;
-	getPlaceDetailsData(placeID);
-}
-
-function getAutoCompleteData(query) {
-	var placesEndpoint = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + query + '&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
-
-	var settings = {
-		crossOrigin:true,
-		success:parseAutoCompleteResults
-	}
-	$.ajax(placesEndpoint,settings);
-};
-
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function parsePlaceDetailsData(data) {
-	var response = JSON.parse(data);
-
-	//var random = getRandomInt(0,9);
-
-	var photoReference = response.result.photos[0].photo_reference;
-	var maxwidth = 900;
-	var maxheight = 556;
-
-	usePhotoData(photoReference,maxwidth,maxheight);
-}
-
-function getPlaceDetailsData(placeID) {
-	var detailsEndpoint = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeID +'&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
-
-	var settings = {
-		crossOrigin:true,
-		success:parsePlaceDetailsData
-	};
-
-	$.ajax(detailsEndpoint,settings);
-}
-
-function usePhotoData(photoReference,maxWidth,maxheight) {
-	
-	var photoEndpoint = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + photoReference + '&maxwidth=' + maxWidth + '&maxheight=' + maxheight + '&key=AIzaSyAku9hD3BMnnJ0rbB56gqYFJ0CXLd58aKI';
-	
-	$('.img-holder').html('');
-	$('.img-holder').html('<img class="city-image" src=\"' + photoEndpoint + '\">');
-};
 
 
 
