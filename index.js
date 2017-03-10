@@ -77,7 +77,6 @@ function usePhotoData(photoReference,maxWidth,maxheight) {
 
 //Render Functions
 function renderForecast(data) {
-
 	$('.error-div').addClass('hidden');
 	
 	if(data.forecast) {

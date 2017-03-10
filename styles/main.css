@@ -379,6 +379,40 @@ header {
 	background-size: 100% 115%;
 }
 
+.Fog {
+	position: relative;
+}
+
+.Fog::after {
+	content: '';
+	background-image: url('https://img12.deviantart.net/fd6c/i/2012/023/1/8/foggy_2_by_twilitesmuse-d4nfo74.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
+.Ice_Pellets {
+	position: relative;
+}
+
+.Ice_Pellets::after {
+	content: '';
+	background-image: url('https://icons.wxug.com/data/wximagenew/x/xnoidentityx/31.jpg');
+	opacity: 0.4;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: -1;
+	background-size: 100% 115%;
+}
+
 /*-----Mobile Classes-----*/
 
 @media only screen and (max-device-width: 425px) {
