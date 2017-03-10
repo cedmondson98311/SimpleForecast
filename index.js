@@ -78,6 +78,7 @@ function usePhotoData(photoReference,maxWidth,maxheight) {
 //Render Functions
 function renderForecast(data) {
 	$('.error-div').addClass('hidden');
+	$('.img-holder').removeClass('hidden');
 	console.log(data);
 	if(data.forecast) {
 		var response = data.forecast.simpleforecast.forecastday;
@@ -128,6 +129,7 @@ function renderForecast(data) {
 	} else {
 		
 		$('.error-div').removeClass('hidden');
+		$('.img-holder').addClass('hidden');
 	}
 
 };
