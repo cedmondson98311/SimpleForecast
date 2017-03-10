@@ -78,17 +78,26 @@ function usePhotoData(photoReference,maxWidth,maxheight) {
 //Render Functions
 function renderForecast(data) {
 	$('.error-div').addClass('hidden');
-	
+	console.log(data);
 	if(data.forecast) {
 		var response = data.forecast.simpleforecast.forecastday;
 		var fullLocation = data.current_observation.display_location.full;
 		var creditImage = data.current_observation.image.url
 		var creditLink = data.current_observation.forecast_url;
+		
 		var currentCondition = data.current_observation.weather;
 		var currentConditionIcon = data.current_observation.icon_url;
 		var currentTemp = data.current_observation.temperature_string;
-		var currentHigh = response[0].high.fahrenheit;
-		var currentLow = response[0].low.fahrenheit;
+		var currentHigh = response[0].high.fahrenheit + '&degF';
+		var currentLow = response[0].low.fahrenheit + '&degF';
+		var feelsLike = data.current_observation.feelslike_f + '&degF';
+			if(data.current_observation.precip_today_in == '') {
+			var precipToday = '0in';
+			} else {
+			var precipToday = data.current_observation.precip_today_in + 'in';
+			};
+		var visibility = data.current_observation.visibility_mi + 'mi';
+		var wind = data.current_observation.wind_mph + ' mph ' + data.current_observation.wind_dir;
 		
 		renderResultsHeader(fullLocation);
 
@@ -97,19 +106,23 @@ function renderForecast(data) {
 			var icon = response[i].icon_url.replace('http:','https:');
 			var highTemp = response[i].high.fahrenheit;
 			var lowTemp = response[i].low.fahrenheit;
+			var aveHumidity = response[i].avehumidity + '%';
+			var aveWind = response[i].avewind.mph + 'mph ' + response[i].avewind.dir;
 			
-			renderDays(date,response[i].conditions,icon,highTemp,lowTemp);
+			renderDays(date,response[i].conditions,icon,highTemp,lowTemp,aveHumidity,aveWind);
 			}
 		for (var i = 5; i < response.length; i ++) {
 			var date = response[i].date.monthname + ' ' + response[i].date.day;
 			var icon = response[i].icon_url.replace('http:','https:');
 			var highTemp = response[i].high.fahrenheit;
 			var lowTemp = response[i].low.fahrenheit;
+			var aveHumidity = response[i].avehumidity + '%';
+			var aveWind = response[i].avewind.mph + 'mph ' + response[i].avewind.dir;
 			
-			renderDays(date,response[i].conditions,icon,highTemp,lowTemp);
+			renderDays(date,response[i].conditions,icon,highTemp,lowTemp,aveHumidity,aveWind);
 			}
 
-		renderCurrentConditions(currentCondition,currentConditionIcon,currentTemp,currentHigh,currentLow);
+		renderCurrentConditions(currentCondition,currentConditionIcon,currentTemp,feelsLike,currentHigh,currentLow,precipToday,visibility,wind);
 
 		renderCreditHeader(creditImage,creditLink);
 	} else {
@@ -127,21 +140,24 @@ function renderCreditHeader(logo,link) {
 	$('.credit-header').append('<a href=\"' + link + '\"><img class="credit-logo" src=\"' + logo + '\"></a>');
 }
 
-function renderDays(day,conditions,icon,highTemp,lowTemp) {
-	$('.forecast').append('<div class=\'forecastDay col-4 ' + normalizeConditionsText(conditions) + '\'><p>' + day + 
+function renderDays(day,conditions,icon,highTemp,lowTemp,aveHumidity,aveWind) {
+	$('.forecast').append('<div class=\'forecastDay col-4 ' + normalizeConditionsText(conditions) + '\'><p class=\'conditions\'>' + day + 
 		':</p><p class=\"conditions\">' + conditions +
-		'</p><img src=' + icon + '><p>H: ' + highTemp + '&degF&nbsp&nbsp&nbspL: ' + lowTemp + '&degF');
-	}
+		'</p><img src=' + icon + '><p class=\'conditions\'>H: ' + highTemp + '&degF&nbsp&nbsp&nbspL: ' + lowTemp + '&degF<br><p class=\'stats\'>Humidity: ' +
+		aveHumidity + '<br><br>Average Wind: ' + aveWind);
+}
 
-function renderCurrentConditions(conditions,iconURL,temp,highTemp,lowTemp) {
+function renderCurrentConditions(conditions,iconURL,temp,feelsLike,highTemp,lowTemp,precipToday,visibility,wind) {
 	$('.current-conditions').append('<div class=\"results-header\"><p>Current Conditions</p></div><div class=\"col-20 current ' + 
-		normalizeConditionsText(conditions) + '\"><p>' + conditions + '</p><img src=\"' + iconURL + '\"><p>Current Temperature: ' + temp +
-		'</p><p>Today\'s High: ' + highTemp + '</p><p>Today\'s Low ' + lowTemp + '</p></div>');
+		normalizeConditionsText(conditions) + '\"><p>' + conditions + '</p><img src=\"' + iconURL + '\"><p class=\'current-stats\'>Current Temperature: ' + temp +
+		'</p><p class=\'current-stats\'>Feels Like: ' + feelsLike + '</p><p class=\'current-stats\'>Today\'s High: ' + highTemp + '&nbsp&nbsp&nbspToday\'s Low ' + 
+		lowTemp + '</p><p class=\'current-stats\'>Precipitation Today: ' + precipToday + '</p><p class=\'current-stats\'>Visibility: ' + visibility + '</p>' + 
+		'<p class=\'current-stats\'>Wind: ' + wind + '</div>');
 }
 
 function normalizeConditionsText(string) {
 	return string.replace(/\s/g,'_');
-	}
+}
 
 function grabUserQuery() {
 	var query = $('.search-bar').val().trim();
